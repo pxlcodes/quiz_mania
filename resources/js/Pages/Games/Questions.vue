@@ -1,5 +1,16 @@
 <script setup>
-import AppLayout from "@/Layouts/AppLayout.vue";</script>
+
+import AppLayout from "@/Layouts/AppLayout.vue";
+
+defineProps({
+    category: Object,
+    questions: Object,
+    total: Number,
+    answered: Number,
+});
+
+
+</script>
 
 <template>
     <AppLayout title="Dashboard">
@@ -43,7 +54,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";</script>
                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8.25 4.5l7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                <span class="ml-3 text-slate-200 dark:text-slate-400">General</span>
+                <span class="ml-3 text-slate-200 dark:text-slate-400"> {{ category.name }} </span>
             </div>
 
             <section
@@ -150,31 +161,15 @@ import AppLayout from "@/Layouts/AppLayout.vue";</script>
                             >General Round 12/35</span>
                             <div class="px-3 py-2.5">
                                 <div class="px-5 py-4 flex space-x-8">
-                                    <a class="flex items-center justify-between p-1.5 w-10 h-10 rounded-full bg-green-200 border border-green-700 text-green-700"
-                                       href="#">
-                                        <div class="mx-auto font-semibold">1</div>
+                                    <a
+                                        v-for="question in questions"
+                                        :key="question.id"
+                                        :class="question.answered ? 'bg-red-200 border-red-700 text-red-700' : 'bg-green-200 border-green-700 text-green-700'"
+                                        :href="question.url"
+                                        class="flex items-center justify-between p-1.5 w-10 h-10 rounded-full border">
+                                        <div class="mx-auto font-semibold"> {{ question.order }}</div>
                                     </a>
-                                    <a class="flex items-center justify-between p-1.5 w-10 h-10 rounded-full bg-green-200 border border-green-700 text-green-700"
-                                       href="#">
-                                        <div class="mx-auto font-semibold">2</div>
-                                    </a>
-                                    <a class="flex items-center justify-between p-1.5 w-10 h-10 rounded-full bg-red-200 border border-red-700 text-red-700"
-                                       href="#">
-                                        <div class="mx-auto font-semibold">10</div>
-                                    </a>
-                                    <a class="flex items-center justify-between p-1.5 w-10 h-10 rounded-full bg-red-200 border border-red-700 text-red-700"
-                                       href="#">
-                                        <div class="mx-auto font-semibold">11</div>
-                                    </a>
-                                    <a class="flex items-center justify-between p-1.5 w-10 h-10 rounded-full bg-green-200 border border-green-700 text-green-700"
-                                       href="#">
-                                        <div class="mx-auto font-semibold">12</div>
-                                    </a>
-
-
                                 </div>
-
-
                             </div>
                         </div>
                     </div>

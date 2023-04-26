@@ -1,13 +1,20 @@
 <script setup>
 
-import SideBarNav from "@/Components/SideBarNav.vue";</script>
+import SideBarNav from "@/Components/SideBarNav.vue";
+
+defineProps({
+    active: String,
+});
+
+
+</script>
 <template>
     <div class="flex flex-col col-auto md:col-span-2">
         <div
             class="flex flex-col overflow-hidden bg-white rounded-sm shadow-md drop-shadow-md dark:bg-slate-800 dark:text-white"
         >
             <SideBarNav
-                :active="$page.url === '/dashboard'"
+                :active="active==='dashboard'"
                 href="/dashboard"
                 title="Dashboard"
             >
@@ -29,7 +36,7 @@ import SideBarNav from "@/Components/SideBarNav.vue";</script>
             </SideBarNav>
 
             <SideBarNav
-                :active="$page.url === '/teams'"
+                :active="active==='teams'"
                 href="/teams"
                 title="Teams"
             >
@@ -45,11 +52,12 @@ import SideBarNav from "@/Components/SideBarNav.vue";</script>
             </SideBarNav>
 
             <SideBarNav
-                :active="$page.url === '/points'"
+                :active="active==='points'"
                 href="/points"
                 title="Points"
             >
                 <template #icon>
+
                     <svg
                         class="w-6 h-6"
                         fill="none"
@@ -68,7 +76,24 @@ import SideBarNav from "@/Components/SideBarNav.vue";</script>
             </SideBarNav>
 
             <SideBarNav
-                :active="$page.url === '/categories'"
+                :active="active==='games'"
+                href="/games"
+                title="Games"
+            >
+                <template #icon>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"
+                         viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg>
+                </template>
+            </SideBarNav>
+
+
+            <SideBarNav
+                :active="active==='categories'"
                 href="/categories"
                 title="Categories"
             >

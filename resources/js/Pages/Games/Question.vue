@@ -62,6 +62,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";</script>
                         <div class="text-6xl font-bold">
                             {{ timer }}
                         </div>
+                        <audio ref="audio" :src="audioSrc"></audio>
                     </div>
                     <div class="w-full relative mt-10">
                         <div class="absolute h-2 rounded-full w-full bg-red-300"></div>
@@ -139,7 +140,9 @@ import AppLayout from "@/Layouts/AppLayout.vue";</script>
 </template>
 
 <script>
+
 export default {
+
     data() {
         return {
             question: 'लाफिङ ग्यास भनेर कुन ग्यासलाई चिनिन्छ ?',
@@ -147,9 +150,11 @@ export default {
             answer: 'नाइट्रस अक्साइड',
             teams: ['Team 1', 'Team 2', 'Team 3', 'Team 4'],
             current_team: 0,
-            timer: 60,
+            timer: 5,
             lock: false,
             reveal: false,
+            audioSrc: 'http://127.0.0.1:8000/storage/audio/wrong-answer-948.wav',
+
         }
     },
     computed: {
@@ -181,6 +186,7 @@ export default {
         setInterval(() => {
             if (this.timer === 0 || this.lock) {
                 this.lock = true
+                this.$refs.audio.play();
                 return;
             }
             this.timer--

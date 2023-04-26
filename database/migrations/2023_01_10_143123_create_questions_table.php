@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -17,8 +16,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('order');
             $table->text('question');
+            $table->unsignedInteger('difficulty')->default(1); // 1-5
+            $table->boolean('read')->default(false);
             $table->unsignedInteger('category_id');
-            $table->unsignedInteger('points')->default(1);
             $table->text('media')->nullable();
             $table->string('media_type')->nullable();
             $table->timestamps();

@@ -54,7 +54,7 @@ import DashboardSideBar from "@/Components/SideMenuBar/DashboardSideBar.vue";</s
             <section
                 class="grid grid-cols-1 gap-4 mt-4 sm:mt-4 sm:grid-cols-1 md:mt-8 md:grid-cols-7 md:gap-10"
             >
-                <DashboardSideBar/>
+                <DashboardSideBar active="dashboard"/>
                 <div class="flex flex-col col-auto md:col-span-5">
                     <div class="flex flex-col md:col-span-2">
                         <div

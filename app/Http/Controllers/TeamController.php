@@ -2,48 +2,61 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Team;
 use App\Http\Requests\StoreTeamRequest;
 use App\Http\Requests\UpdateTeamRequest;
+use App\Imports\TeamImport;
+use App\Models\Team;
+use Illuminate\Http\Response;
+use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TeamController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
-    public function index()
+    public function index(): \Inertia\Response
     {
-        //
-    }
+        $teams = Team::all();
+        return Inertia::render('Teams/Index', [
+            'teams' => $teams
+        ]);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreTeamRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreTeamRequest $request
+     * @return Response
      */
     public function store(StoreTeamRequest $request)
     {
-        //
+        if ($request->hasFile('file')) {
+            Excel::import(new TeamImport(), $request->file('file'));
+        }
+//        $team = Team::create($request->validated());
+
+
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Inertia\Response
+     */
+    public function create(): \Inertia\Response
+    {
+        return Inertia::render('Teams/Create',);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Team  $team
-     * @return \Illuminate\Http\Response
+     * @param Team $team
+     * @return Response
      */
     public function show(Team $team)
     {
@@ -53,8 +66,8 @@ class TeamController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Team  $team
-     * @return \Illuminate\Http\Response
+     * @param Team $team
+     * @return Response
      */
     public function edit(Team $team)
     {
@@ -64,9 +77,9 @@ class TeamController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateTeamRequest  $request
-     * @param  \App\Models\Team  $team
-     * @return \Illuminate\Http\Response
+     * @param UpdateTeamRequest $request
+     * @param Team $team
+     * @return Response
      */
     public function update(UpdateTeamRequest $request, Team $team)
     {
@@ -76,8 +89,8 @@ class TeamController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Team  $team
-     * @return \Illuminate\Http\Response
+     * @param Team $team
+     * @return Response
      */
     public function destroy(Team $team)
     {

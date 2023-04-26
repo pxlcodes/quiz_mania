@@ -9,7 +9,7 @@ module.exports = {
         "./resources/views/**/*.blade.php",
         "./resources/js/**/*.vue",
     ],
-    darkMode: "media",
+    darkMode: "class",
 
     theme: {
         extend: {

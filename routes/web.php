@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Ajax\TeamScoreController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GameController;
-use App\Models\Category;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\TeamController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,33 +34,30 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
     Route::get('/games', [GameController::class, 'index'])->name('games.index');
 
+    Route::resource('teams', TeamController::class);
+
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
 
-    Route::get('/categories/{category:name}', function (Category $category) {
-        $questions = $category->questions;
+    Route::post('/categories', [CategoryController::class, 'store'])->name('categories.create');
 
-        $total = $questions->count();
-        $answered = $questions->where('answered', true)->count();
+    Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
 
-        return Inertia::render('Games/Questions');
-    })->name('games.category');
+    Route::get('/games/create', [GameController::class, 'create'])->name('games.create');
 
+    Route::post('/games', [GameController::class, 'store'])->name('games.store');
 
-    Route::get('/games/{category:name}', function (Category $category) {
-        $questions = $category->questions;
-        return Inertia::render('Games/Questions');
-    })->name('games.category');
+    Route::get('/questions/{question}', [QuestionController::class, 'show'])->name('questions.show');
 
-    Route::get('/games/{category:name}/1', function (Category $category) {
-        return Inertia::render('Games/Question');
-    })->name('games.question');
-
+    // Ajax routes
+    Route::post('/ajax/team-score/store', [TeamScoreController::class, 'store'])->name('ajax.team-score.store');
 
 });

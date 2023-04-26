@@ -1,8 +1,9 @@
 <script setup>
-import { ref } from "vue";
-import { Inertia } from "@inertiajs/inertia";
-import { Head, Link } from "@inertiajs/inertia-vue3";
+import {ref} from "vue";
+import {Inertia} from "@inertiajs/inertia";
+import {Head, Link} from "@inertiajs/inertia-vue3";
 import ApplicationMark from "@/Components/ApplicationMark.vue";
+import DashboardFooter from "@/Components/Dashboard/Footer.vue";
 import Banner from "@/Components/Banner.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
@@ -35,9 +36,9 @@ const logout = () => {
 
 <template>
     <div>
-        <Head :title="title" />
+        <Head :title="title"/>
 
-        <Banner />
+        <Banner/>
 
         <div class="bg-slate-300/25 dark:bg-slate-600">
             <nav class="bg-white border-b border-gray-100 hidden">
@@ -48,7 +49,7 @@ const logout = () => {
                             <!-- Logo -->
                             <div class="flex items-center shrink-0">
                                 <Link :href="route('dashboard')">
-                                    <ApplicationMark class="block w-auto h-9" />
+                                    <ApplicationMark class="block w-auto h-9"/>
                                 </Link>
                             </div>
 
@@ -57,8 +58,8 @@ const logout = () => {
                                 class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
                             >
                                 <NavLink
-                                    :href="route('dashboard')"
                                     :active="route().current('dashboard')"
+                                    :href="route('dashboard')"
                                 >
                                     Dashboard
                                 </NavLink>
@@ -76,26 +77,25 @@ const logout = () => {
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
                                             <button
-                                                type="button"
                                                 class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition bg-white border border-transparent rounded-md hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50"
-                                            >
-                                                {{
+                                                type="button"
+                                            > {{
                                                     $page.props.user
                                                         .current_team.name
                                                 }}
 
                                                 <svg
                                                     class="ml-2 -mr-0.5 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
                                                     fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke-width="1.5"
                                                     stroke="currentColor"
+                                                    stroke-width="1.5"
+                                                    viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg"
                                                 >
                                                     <path
+                                                        d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
                                                         stroke-linecap="round"
                                                         stroke-linejoin="round"
-                                                        d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
                                                     />
                                                 </svg>
                                             </button>
@@ -178,16 +178,16 @@ const logout = () => {
                                                                             .current_team_id
                                                                     "
                                                                     class="w-5 h-5 mr-2 text-green-400"
-                                                                    xmlns="http://www.w3.org/2000/svg"
                                                                     fill="none"
-                                                                    viewBox="0 0 24 24"
-                                                                    stroke-width="1.5"
                                                                     stroke="currentColor"
+                                                                    stroke-width="1.5"
+                                                                    viewBox="0 0 24 24"
+                                                                    xmlns="http://www.w3.org/2000/svg"
                                                                 >
                                                                     <path
+                                                                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                                                                         stroke-linecap="round"
                                                                         stroke-linejoin="round"
-                                                                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                                                                     />
                                                                 </svg>
 
@@ -218,12 +218,12 @@ const logout = () => {
                                             class="flex text-sm transition border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300"
                                         >
                                             <img
-                                                class="object-cover w-8 h-8 rounded-full"
+                                                :alt="$page.props.user.name"
                                                 :src="
                                                     $page.props.user
                                                         .profile_photo_url
                                                 "
-                                                :alt="$page.props.user.name"
+                                                class="object-cover w-8 h-8 rounded-full"
                                             />
                                         </button>
 
@@ -232,23 +232,23 @@ const logout = () => {
                                             class="inline-flex rounded-md"
                                         >
                                             <button
-                                                type="button"
                                                 class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50"
+                                                type="button"
                                             >
                                                 {{ $page.props.user.name }}
 
                                                 <svg
                                                     class="ml-2 -mr-0.5 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
                                                     fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke-width="1.5"
                                                     stroke="currentColor"
+                                                    stroke-width="1.5"
+                                                    viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg"
                                                 >
                                                     <path
+                                                        d="M4.5 12.75l6 6 9-13.5"
                                                         stroke-linecap="round"
                                                         stroke-linejoin="round"
-                                                        d="M4.5 12.75l6 6 9-13.5"
                                                     />
                                                 </svg>
                                             </button>
@@ -279,7 +279,7 @@ const logout = () => {
                                             API Tokens
                                         </DropdownLink>
 
-                                        <div class="border-t border-gray-100" />
+                                        <div class="border-t border-gray-100"/>
 
                                         <!-- Authentication -->
                                         <form @submit.prevent="logout">
@@ -303,8 +303,8 @@ const logout = () => {
                             >
                                 <svg
                                     class="w-6 h-6"
-                                    stroke="currentColor"
                                     fill="none"
+                                    stroke="currentColor"
                                     viewBox="0 0 24 24"
                                 >
                                     <path
@@ -313,10 +313,10 @@ const logout = () => {
                                             'inline-flex':
                                                 !showingNavigationDropdown,
                                         }"
+                                        d="M4 6h16M4 12h16M4 18h16"
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
                                         stroke-width="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
                                     />
                                     <path
                                         :class="{
@@ -324,10 +324,10 @@ const logout = () => {
                                             'inline-flex':
                                                 showingNavigationDropdown,
                                         }"
+                                        d="M6 18L18 6M6 6l12 12"
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
                                         stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12"
                                     />
                                 </svg>
                             </button>
@@ -345,8 +345,8 @@ const logout = () => {
                 >
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink
-                            :href="route('dashboard')"
                             :active="route().current('dashboard')"
+                            :href="route('dashboard')"
                         >
                             Dashboard
                         </ResponsiveNavLink>
@@ -362,9 +362,9 @@ const logout = () => {
                                 class="mr-3 shrink-0"
                             >
                                 <img
-                                    class="object-cover w-10 h-10 rounded-full"
-                                    :src="$page.props.user.profile_photo_url"
                                     :alt="$page.props.user.name"
+                                    :src="$page.props.user.profile_photo_url"
+                                    class="object-cover w-10 h-10 rounded-full"
                                 />
                             </div>
 
@@ -382,16 +382,16 @@ const logout = () => {
 
                         <div class="mt-3 space-y-1">
                             <ResponsiveNavLink
-                                :href="route('profile.show')"
                                 :active="route().current('profile.show')"
+                                :href="route('profile.show')"
                             >
                                 Profile
                             </ResponsiveNavLink>
 
                             <ResponsiveNavLink
                                 v-if="$page.props.jetstream.hasApiFeatures"
-                                :href="route('api-tokens.index')"
                                 :active="route().current('api-tokens.index')"
+                                :href="route('api-tokens.index')"
                             >
                                 API Tokens
                             </ResponsiveNavLink>
@@ -407,7 +407,7 @@ const logout = () => {
                             <template
                                 v-if="$page.props.jetstream.hasTeamFeatures"
                             >
-                                <div class="border-t border-gray-200" />
+                                <div class="border-t border-gray-200"/>
 
                                 <div
                                     class="block px-4 py-2 text-xs text-gray-400"
@@ -417,26 +417,26 @@ const logout = () => {
 
                                 <!-- Team Settings -->
                                 <ResponsiveNavLink
+                                    :active="route().current('teams.show')"
                                     :href="
                                         route(
                                             'teams.show',
                                             $page.props.user.current_team
                                         )
                                     "
-                                    :active="route().current('teams.show')"
                                 >
                                     Team Settings
                                 </ResponsiveNavLink>
 
                                 <ResponsiveNavLink
                                     v-if="$page.props.jetstream.canCreateTeams"
-                                    :href="route('teams.create')"
                                     :active="route().current('teams.create')"
+                                    :href="route('teams.create')"
                                 >
                                     Create New Team
                                 </ResponsiveNavLink>
 
-                                <div class="border-t border-gray-200" />
+                                <div class="border-t border-gray-200"/>
 
                                 <!-- Team Switcher -->
                                 <div
@@ -459,16 +459,16 @@ const logout = () => {
                                                             .current_team_id
                                                     "
                                                     class="w-5 h-5 mr-2 text-green-400"
-                                                    xmlns="http://www.w3.org/2000/svg"
                                                     fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke-width="1.5"
                                                     stroke="currentColor"
+                                                    stroke-width="1.5"
+                                                    viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg"
                                                 >
                                                     <path
+                                                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                                                         stroke-linecap="round"
                                                         stroke-linejoin="round"
-                                                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                                                     />
                                                 </svg>
                                                 <div>{{ team.name }}</div>
@@ -488,17 +488,16 @@ const logout = () => {
             <!-- Page Heading -->
             <header v-if="$slots.header" class="bg-white shadow">
                 <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <slot name="header" />
+                    <slot name="header"/>
                 </div>
             </header>
 
             <!-- Page Content -->
             <main>
-                <slot />
+                <slot/>
             </main>
         </div>
-        <footer class="py-4 md:py-8  text-center text-white px-4 bg-slate-800 px-4 sm:px-4  md:px-container  lg:px-container">
-            Copyright Ara Tech Solution Pvt. Ltd., &copy; 2023
-        </footer>
+        <DashboardFooter></DashboardFooter>
+
     </div>
 </template>

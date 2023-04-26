@@ -13,7 +13,7 @@ class StoreGameRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class StoreGameRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'file' => 'file|mimes:xlsx,xls,csv',
         ];
+    }
+
+    public function errorBag()
+    {
+        return 'storeGame';
     }
 }

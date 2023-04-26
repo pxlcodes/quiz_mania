@@ -4,32 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Imports\CategoryImport;
 use App\Models\Category;
 use Illuminate\Http\Response;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        return Inertia::render('Categories/Index', [
-            'categories' => Category::all()
-        ]);
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
+    public function index(): \Inertia\Response
     {
-        //
+
+        $categories = Category::withCount('questions')->get();
+
+        return Inertia::render('Categories/Index', [
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -40,18 +31,49 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        if ($request->hasFile('file')) {
+            Excel::import(new CategoryImport(), $request->file('file'));
+        }
+
+        $input = $request->input();
+        $input['icon'] = preg_replace('/class=".*?"/', '', $request->get('icon'));
+        dd($input);
+
+
+        $category = Category::create($input);
+
+        return redirect()->route('categories.show', $category->name);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Inertia\Response
+     */
+    public function create()
+    {
+        return Inertia::render('Categories/Create');
     }
 
     /**
      * Display the specified resource.
      *
      * @param Category $category
-     * @return Response
+     * @return \Inertia\Response
      */
-    public function show(Category $category)
+    public function show(Category $category): \Inertia\Response
     {
-        //
+        $questions = $category->questions()->with('options')->get();
+
+        $answered = $questions->where('answered', true)->count();
+        $total = $questions->count();
+
+        return Inertia::render('Questions/Index', [
+            'questions' => $questions,
+            'answered' => $answered,
+            'total' => $total,
+            'category' => $category
+        ]);
     }
 
     /**
